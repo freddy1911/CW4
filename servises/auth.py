@@ -69,13 +69,13 @@ def approve_refresh_token(refresh_token):
 def get_email_from_header(header: str):
     token = header.split('Bearer ')[-1]
     data_dict = jwt.decode(token, secret, algo)
-    email = data_dict.get('user_email')
+    email = data_dict.get('email')
 
     return email
 
 
-def change_the_password(user_email, pass1, pass2):
-    user = user_service.get_by_email(user_email)
+def change_the_password(email, pass1, pass2):
+    user = user_service.get_by_email(email)
     db_pass = user.password
     is_confirmed = check_password(db_pass, pass1)
 
